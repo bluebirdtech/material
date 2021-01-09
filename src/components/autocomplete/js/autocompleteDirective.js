@@ -400,7 +400,7 @@ function MdAutocomplete ($$mdSvgRegistry) {
             <ul class="md-autocomplete-suggestions"\
                 ng-class="::menuClass"\
                 id="ul-{{$mdAutocompleteCtrl.id}}"\
-                ng-mouseup="$mdAutocompleteCtrl.focusInput()"\
+            ' + getMouseUp() + '\
                 role="listbox">\
               <li class="md-autocomplete-suggestion" ' + getRepeatType(attr.mdMode) + ' ="item in $mdAutocompleteCtrl.matches"\
                   ng-class="{ selected: $index === $mdAutocompleteCtrl.index }"\
@@ -416,6 +416,10 @@ function MdAutocomplete ($$mdSvgRegistry) {
             </ul>\
           '  + getContainerClosingTags(attr.mdMode) + '\
         </md-autocomplete-wrap>';
+
+      function getMouseUp() {
+        return attr.mdNoFocusAfterSelect !== undefined ? '' : 'ng-mouseup="$mdAutocompleteCtrl.focusInput()"'
+      }
 
       function getItemTemplate() {
         var templateTag = element.find('md-item-template').detach(),
